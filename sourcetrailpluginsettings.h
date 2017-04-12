@@ -1,11 +1,12 @@
 #ifndef SOURCETRAILPLUGINSETTINGS_H
 #define SOURCETRAILPLUGINSETTINGS_H
 
+#include <QObject>
 #include <QString>
 
 class QSettings;
 
-namespace SourceTrailPlugin {
+namespace SourceTrail {
 
 class SourceTrailPluginSettings
 {
@@ -22,6 +23,7 @@ public:
 
 inline bool operator==(const SourceTrailPluginSettings &t1, const SourceTrailPluginSettings &t2) { return t1.equals(t2); }
 inline bool operator!=(const SourceTrailPluginSettings &t1, const SourceTrailPluginSettings &t2) { return !t1.equals(t2); }
+
 
 } // namespace SoureTrailPlugin
 

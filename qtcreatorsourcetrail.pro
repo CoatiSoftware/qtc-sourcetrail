@@ -1,18 +1,22 @@
-QT += network
+QT += gui network
+
+CONFIG += include_source_dir
 
 DEFINES += QTCREATORSOURCETRAIL_LIBRARY
 
 # QtCreatorSourceTrail files
 
-SOURCES += qtcreatorsourcetrailplugin.cpp \
+SOURCES += \
     sourcetrailpluginsettingspage.cpp \
-    sourcetrailpluginsettings.cpp
+    sourcetrailpluginsettings.cpp \
+    sourcetrailplugin.cpp
 
-HEADERS += qtcreatorsourcetrailplugin.h \
-        qtcreatorsourcetrail_global.h \
-        qtcreatorsourcetrailconstants.h \
+HEADERS += \
     sourcetrailpluginsettingspage.h \
-    sourcetrailpluginsettings.h
+    sourcetrailpluginsettings.h \
+    sourcetrailplugin.h \
+    sourcetrailconstants.h \
+    sourcetrail_global.h
 
 # Qt Creator linking
 
@@ -54,3 +58,5 @@ include($$IDE_SOURCE_TREE/src/qtcreatorplugin.pri)
 
 FORMS += \
     sourcetrailpluginsettingspage.ui
+
+RESOURCES += sourcetrail.qrc

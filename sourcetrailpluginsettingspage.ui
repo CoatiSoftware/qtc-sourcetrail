@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SourceTrailPluginSettingsPage</class>
+ <class>SourceTrail::SourceTrailPluginSettingsPage</class>
  <widget class="QWidget" name="SourceTrailPluginSettingsPage">
   <property name="geometry">
    <rect>

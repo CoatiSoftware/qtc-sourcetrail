@@ -1,22 +1,22 @@
 #pragma once
 
-#include "qtcreatorsourcetrail_global.h"
+#include "sourcetrail_global.h"
+#include "sourcetrailpluginsettingspage.h"
 
 #include <extensionsystem/iplugin.h>
 
 class QTcpServer;
 
-namespace QtCreatorSourceTrail {
-namespace Internal {
+namespace SourceTrail {
 
-class QtCreatorSourceTrailPlugin : public ExtensionSystem::IPlugin
+class SourcetrailPlugin : public ExtensionSystem::IPlugin
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "QtCreatorSourceTrail.json")
 
 public:
-	QtCreatorSourceTrailPlugin();
-	~QtCreatorSourceTrailPlugin();
+	SourcetrailPlugin();
+	~SourcetrailPlugin();
 
 	bool initialize(const QStringList &arguments, QString *errorString);
 	void extensionsInitialized();
@@ -32,7 +32,8 @@ private:
 	void sendMessage(QString message);
 	void setCursor(QString file, int line, int column);
 	QTcpServer* m_server;
+	SourceTrailPluginSettingsPage* m_settings;
+
 };
 
-} // namespace Internal
-} // namespace QtCreatorSourceTrail
+} // namespace SourceTrailPlugin

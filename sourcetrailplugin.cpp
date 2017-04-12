@@ -1,5 +1,5 @@
-#include "qtcreatorsourcetrailplugin.h"
-#include "qtcreatorsourcetrailconstants.h"
+#include "sourcetrailplugin.h"
+#include "sourcetrailconstants.h"
 
 #include <coreplugin/icore.h>
 #include <coreplugin/icontext.h>
@@ -33,10 +33,9 @@
 
 using namespace Core;
 
-namespace QtCreatorSourceTrail {
-namespace Internal {
+namespace SourceTrail {
 
-QtCreatorSourceTrailPlugin::QtCreatorSourceTrailPlugin()
+SourcetrailPlugin::SourcetrailPlugin()
 {
 	// Create your members
 	m_server = new QTcpServer(this);
@@ -54,7 +53,7 @@ QtCreatorSourceTrailPlugin::QtCreatorSourceTrailPlugin()
 	});
 }
 
-void QtCreatorSourceTrailPlugin::handleMessage(QString message)
+void SourcetrailPlugin::handleMessage(QString message)
 {
 	message = message.remove(message.indexOf("<EOM>"),5);
 	QStringList list = message.split(">>");
@@ -69,7 +68,7 @@ void QtCreatorSourceTrailPlugin::handleMessage(QString message)
 	}
 }
 
-QtCreatorSourceTrailPlugin::~QtCreatorSourceTrailPlugin()
+SourcetrailPlugin::~SourcetrailPlugin()
 {
 	// Unregister objects from the plugin manager's object pool
 	// Delete members
@@ -78,7 +77,7 @@ QtCreatorSourceTrailPlugin::~QtCreatorSourceTrailPlugin()
 	delete m_server;
 }
 
-bool QtCreatorSourceTrailPlugin::initialize(const QStringList &arguments, QString *errorString)
+bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorString)
 {
 	// Register objects in the plugin manager's object pool
 	// Load settings
@@ -90,11 +89,13 @@ bool QtCreatorSourceTrailPlugin::initialize(const QStringList &arguments, QStrin
 	Q_UNUSED(arguments)
 	Q_UNUSED(errorString)
 
+	m_settings = new SourceTrailPluginSettingsPage(this);
+
 	QAction *action = new QAction(tr("QtCreatorSourceTrail Action"), this);
 	Core::Command *cmd = Core::ActionManager::registerAction(action, Constants::ACTION_ID,
 															 Core::Context(Core::Constants::C_GLOBAL));
 	cmd->setDefaultKeySequence(QKeySequence(tr("Ctrl+Alt+Meta+A")));
-	connect(action, &QAction::triggered, this, &QtCreatorSourceTrailPlugin::triggerAction);
+	connect(action, &QAction::triggered, this, &SourcetrailPlugin::triggerAction);
 
 	Core::ActionContainer *menu = Core::ActionManager::createMenu(Constants::MENU_ID);
 	menu->menu()->setTitle(tr("QtCreatorSourceTrail"));
@@ -106,14 +107,14 @@ bool QtCreatorSourceTrailPlugin::initialize(const QStringList &arguments, QStrin
 	return true;
 }
 
-void QtCreatorSourceTrailPlugin::extensionsInitialized()
+void SourcetrailPlugin::extensionsInitialized()
 {
 	// Retrieve objects from the plugin manager's object pool
 	// In the extensionsInitialized function, a plugin can be sure that all
 	// plugins that depend on it are completely initialized.
 }
 
-void QtCreatorSourceTrailPlugin::startListening()
+void SourcetrailPlugin::startListening()
 {
 	if (!m_server->listen(QHostAddress::LocalHost, 6666))
 	{
@@ -124,7 +125,7 @@ void QtCreatorSourceTrailPlugin::startListening()
 
 }
 
-void QtCreatorSourceTrailPlugin::stopListening()
+void SourcetrailPlugin::stopListening()
 {
 	if (m_server->isListening())
 	{
@@ -132,7 +133,7 @@ void QtCreatorSourceTrailPlugin::stopListening()
 	}
 }
 
-ExtensionSystem::IPlugin::ShutdownFlag QtCreatorSourceTrailPlugin::aboutToShutdown()
+ExtensionSystem::IPlugin::ShutdownFlag SourcetrailPlugin::aboutToShutdown()
 {
 	// Save settings
 	// Disconnect from signals that are not needed during shutdown
@@ -140,7 +141,7 @@ ExtensionSystem::IPlugin::ShutdownFlag QtCreatorSourceTrailPlugin::aboutToShutdo
 	return SynchronousShutdown;
 }
 
-void QtCreatorSourceTrailPlugin::sendMessage(QString message)
+void SourcetrailPlugin::sendMessage(QString message)
 {
 	QString host = "localhost";
 	int port = 6667;
@@ -156,13 +157,13 @@ void QtCreatorSourceTrailPlugin::sendMessage(QString message)
 	}
 }
 
-void QtCreatorSourceTrailPlugin::sendPing()
+void SourcetrailPlugin::sendPing()
 {
 	sendMessage("ping>>Qt Creator<EOM>");
 }
 
 
-void QtCreatorSourceTrailPlugin::setCursor(QString file, int line, int column)
+void SourcetrailPlugin::setCursor(QString file, int line, int column)
 {
 	IEditor* editor = Core::EditorManager::openEditorAt(file, line, column);
 	if (editor)
@@ -171,7 +172,7 @@ void QtCreatorSourceTrailPlugin::setCursor(QString file, int line, int column)
 	}
 }
 
-void QtCreatorSourceTrailPlugin::sendLocation()
+void SourcetrailPlugin::sendLocation()
 {
 	IEditor* editor = Core::EditorManager::currentEditor();
 	if (editor)
@@ -193,7 +194,7 @@ void QtCreatorSourceTrailPlugin::sendLocation()
 	}
 }
 
-void QtCreatorSourceTrailPlugin::triggerAction()
+void SourcetrailPlugin::triggerAction()
 {
 	sendPing();
 	sendLocation();
@@ -202,5 +203,4 @@ void QtCreatorSourceTrailPlugin::triggerAction()
 	Core::ICore::openFiles(list);
 }
 
-} // namespace Internal
 } // namespace QtCreatorSourceTrail
