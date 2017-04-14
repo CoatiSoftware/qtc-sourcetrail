@@ -1,0 +1,11 @@
+{
+    \"Name\" : \"Sourcetrail\",
+    \"Version\" : \"4.2.1\",
+    \"CompatVersion\" : \"4.2.0\",
+	\"Vendor\" : \"Coati Software OG\",
+    \"Copyright\" : \"Coati Software OG\",
+    \"License\" : \"MIT\",
+    \"Description\" : \"Connect QtCreator with SourceTrail\",
+    \"Url\" : \"https://sourcetrail.com\",
+    $$dependencyList
+}

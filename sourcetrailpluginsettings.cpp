@@ -9,7 +9,7 @@ static const char addressKey[]         = "Address";
 static const char pluginPortKey[]      = "PluginPort";
 static const char sourceTrailPortKey[] = "SourceTrailPort";
 
-using namespace SourceTrail;
+using namespace Sourcetrail;
 
 
 void SourceTrailPluginSettings::fromSettings(QSettings *s)
@@ -39,5 +39,14 @@ bool SourceTrailPluginSettings::equals(const SourceTrailPluginSettings &stps) co
 		&& m_pluginPort       == stps.m_pluginPort
 		&& m_sourceTrailPort  == stps.m_sourceTrailPort
 		;
+}
+
+void SourceTrailPluginSettings::debugOutput() const
+{
+	qDebug() << "sourcetrail plugin settings:";
+	qDebug() << "address    : " << m_hostAddress;
+	qDebug() << "plugin     : " << m_pluginPort;
+	qDebug() << "sourcetrail: " << m_sourceTrailPort;
+
 }
 

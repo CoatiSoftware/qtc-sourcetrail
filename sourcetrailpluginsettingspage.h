@@ -8,7 +8,7 @@
 
 #include <QPointer>
 
-namespace SourceTrail {
+namespace Sourcetrail {
 
 namespace Ui { class SourceTrailPluginSettingsPage; }
 
@@ -17,7 +17,7 @@ class SourceTrailPluginSettingsPage : public Core::IOptionsPage
 	Q_OBJECT
 
 public:
-	SourceTrailPluginSettingsPage(QObject *parent);
+	SourceTrailPluginSettingsPage(QObject* parent);
 	~SourceTrailPluginSettingsPage();
 
 	// IOptionsPage

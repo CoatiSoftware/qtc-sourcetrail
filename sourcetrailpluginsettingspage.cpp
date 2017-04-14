@@ -6,18 +6,19 @@
 #include <QLineEdit>
 #include "sourcetrailpluginsettings.h"
 #include "sourcetrailconstants.h"
+#include <projectexplorer/projectexplorerconstants.h>
 
-using namespace SourceTrail;
+using namespace Sourcetrail;
 
 
 SourceTrailPluginSettingsPage::SourceTrailPluginSettingsPage(QObject *parent) :
 	Core::IOptionsPage(parent),
 	m_page(0)
 {
-	setId("P.SourceTrail");
-	setDisplayName(tr("SourceTrail"));
+	setId(Constants::CATEGORY_ID);
+	setDisplayName(tr(Constants::CATEGORY));
 
-	setCategory(Core::IOptionsPage::category());
+	setCategory(Core::Id(Constants::CATEGORY_ID));
 	setDisplayCategory(QLatin1String(Constants::CATEGORY));
 	setCategoryIcon(Utils::Icon(Constants::CATEGORY_ICON));
 
@@ -58,6 +59,7 @@ void SourceTrailPluginSettingsPage::apply()
 		emit SourceTrailPluginSettingsChanged(setting);
 	}
 
+	m_settings.debugOutput();
 }
 
 void SourceTrailPluginSettingsPage::settingsFromUi(SourceTrailPluginSettings &settings) const

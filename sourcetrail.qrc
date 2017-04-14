@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/qtcreator-sourcetrail">
+    <qresource prefix="/sourcetrail">
         <file>Icon.png</file>
     </qresource>
 </RCC>

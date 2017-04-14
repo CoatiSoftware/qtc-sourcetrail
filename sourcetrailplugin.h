@@ -7,12 +7,12 @@
 
 class QTcpServer;
 
-namespace SourceTrail {
+namespace Sourcetrail {
 
 class SourcetrailPlugin : public ExtensionSystem::IPlugin
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "QtCreatorSourceTrail.json")
+	Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "Sourcetrail.json")
 
 public:
 	SourcetrailPlugin();
@@ -21,6 +21,10 @@ public:
 	bool initialize(const QStringList &arguments, QString *errorString);
 	void extensionsInitialized();
 	ShutdownFlag aboutToShutdown();
+
+public slots:
+	void restartServer();
+	void stopServer();
 
 private:
 	void handleMessage(QString message);
@@ -32,7 +36,8 @@ private:
 	void sendMessage(QString message);
 	void setCursor(QString file, int line, int column);
 	QTcpServer* m_server;
-	SourceTrailPluginSettingsPage* m_settings;
+	SourceTrailPluginSettingsPage* m_page;
+	SourceTrailPluginSettings m_settings;
 
 };
 

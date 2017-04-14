@@ -6,13 +6,15 @@
 
 class QSettings;
 
-namespace SourceTrail {
+namespace Sourcetrail {
 
 class SourceTrailPluginSettings
 {
 public:
 	void toSettings(QSettings* s) const;
 	void fromSettings(QSettings* s);
+
+	void debugOutput() const;
 
 	bool equals(const SourceTrailPluginSettings &bs) const;
 

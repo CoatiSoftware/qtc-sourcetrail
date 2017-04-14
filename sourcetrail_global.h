@@ -9,7 +9,7 @@
 #endif
 
 
-namespace QtCreatorSourceTrail
+namespace Sourcetrail
 {
 
 enum SourceTrailPluginOptions
