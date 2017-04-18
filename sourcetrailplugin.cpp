@@ -54,10 +54,10 @@ SourcetrailPlugin::SourcetrailPlugin()
 		});
 	});
 
-	m_statusBar = new StatusBarWidget();
-	m_statusBar->setWidget(new QLabel("Test"));
-	m_statusBar->setPosition(StatusBarWidget::LastLeftAligned);
-	addAutoReleasedObject(m_statusBar);
+//	m_statusBar = new StatusBarWidget();
+//	m_statusBar->setWidget(new QLabel("Test"));
+//	m_statusBar->setPosition(StatusBarWidget::LastLeftAligned);
+//	addAutoReleasedObject(m_statusBar);
 
 }
 
