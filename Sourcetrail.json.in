@@ -4,7 +4,7 @@
     \"CompatVersion\" : \"4.2.0\",
 	\"Vendor\" : \"Coati Software OG\",
     \"Copyright\" : \"Coati Software OG\",
-    \"License\" : \"MIT\",
+    \"License\" : \"MITThe MIT License (MIT)\",
     \"Description\" : \"Connect QtCreator with SourceTrail\",
     \"Url\" : \"https://sourcetrail.com\",
     $$dependencyList

@@ -1,0 +1,62 @@
+# Appveyor project configuration file
+# Build the plugin on Windows environment
+
+version: 1.0.{build}
+
+# Official QtC binaries are built
+# with msvc2013-x86
+os: Visual Studio 2015
+platform: x86
+environment:
+  VERSION: 1.0
+  OS_NAME: win32
+  QTDIR: C:\Qt\5.8\msvc2015
+  VSVER: 14.0
+  BINTRAY_KEY:
+    secure: 64COF2Ng3AdKqw6BEQqhlTu8G1j0F43qv6zZ6tg4VLbVCxXBxB2kW42COoqSiBJA
+
+configuration:
+  - Release
+
+# Download and unpack QtC sources and binaries
+install:
+  - cmd: curl -fsSL "https://download.qt.io/official_releases/qtcreator/4.2/4.2.1/qt-creator-opensource-src-4.2.1.zip" -o %APPVEYOR_BUILD_FOLDER%\qt-src.zip
+  - cmd: 7z x -y qt-src.zip -o"%APPVEYOR_BUILD_FOLDER%\qt-src\" | findstr /b /r /c:"\<Everything is Ok"
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.1/installer_source/windows_vs2015_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  - cmd: 7z x -y qt-bin.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
+  # - cmd: curl -fsSL "https://download.qt.io/official_releases/qtcreator/4.0/4.0.0/qt-creator-opensource-src-4.0.0.zip" -o %APPVEYOR_BUILD_FOLDER%\qt-src.zip
+  # - cmd: 7z x -y qt-src.zip -o"%APPVEYOR_BUILD_FOLDER%\qt-src\" | findstr /b /r /c:"\<Everything is Ok"
+  # - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.0/4.0.0/installer_source/windows_vs2013_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  # - cmd: 7z x -y qt-bin.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
+
+# Setup an environment and generate import libs
+before_build:
+  - cmd: '%QTDIR%\bin\qtenv2.bat'
+  - cmd: '"%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" x86'
+  - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\qt-libs
+  - cmd: '%APPVEYOR_BUILD_FOLDER%\build\make_import_libs.bat %APPVEYOR_BUILD_FOLDER%\qt-bin\bin %APPVEYOR_BUILD_FOLDER%\qt-libs'
+  - cmd: '%APPVEYOR_BUILD_FOLDER%\build\make_import_libs.bat %APPVEYOR_BUILD_FOLDER%\qt-bin\lib\qtcreator\plugins %APPVEYOR_BUILD_FOLDER%\qt-libs'
+
+build_script:
+  - cmd: qmake %APPVEYOR_BUILD_FOLDER%/souretrail.pro -r "CONFIG+=%configuration%" "QTC_SOURCE=%APPVEYOR_BUILD_FOLDER%\qt-src\qt-creator-opensource-src-4.2.1" "QTC_BUILD=%APPVEYOR_BUILD_FOLDER%\qt-bin\bin" "LIBS+=-L%APPVEYOR_BUILD_FOLDER%\qt-libs" "OUTPUT_PATH=%APPVEYOR_BUILD_FOLDER%\artifacts\4.2.1"
+  - cmd: nmake.exe
+
+after_build:
+  - cmd: 7z a output.zip %APPVEYOR_BUILD_FOLDER%\artifacts\4.2.1\*
+  # - cmd: python %APPVEYOR_BUILD_FOLDER%/build/generate_bintray.py %APPVEYOR_BUILD_FOLDER%
+  # - cmd: curl -fsSL "http://curl.haxx.se/ca/cacert.pem" -o %APPVEYOR_BUILD_FOLDER%\cacert.pem
+  # - cmd: SET SSL_CERT_FILE=%APPVEYOR_BUILD_FOLDER%\cacert.pem
+  # - cmd: gem install dpl
+  # - cmd: dpl --provider=bintray --file=%APPVEYOR_BUILD_FOLDER%/.bintray.json --user=groterik --key=%BINTRAY_KEY%
+
+artifacts:
+  - path: 'output.zip'
+    name: '%APPVEYOR_PROJECT_NAME%'
+
+deploy:
+  release: qtc-sourcetrail-v$(appveyor_build_version)
+  description: 'Release '
+  provider: GitHub
+  auth_token: 
+    secure: 
+  artifact: 'output.zip'

@@ -59,7 +59,7 @@ void SourceTrailPluginSettingsPage::apply()
 		emit SourceTrailPluginSettingsChanged(setting);
 	}
 
-	m_settings.debugOutput();
+//	m_settings.debugOutput();
 }
 
 void SourceTrailPluginSettingsPage::settingsFromUi(SourceTrailPluginSettings &settings) const

@@ -6,6 +6,7 @@
 #include <extensionsystem/iplugin.h>
 
 class QTcpServer;
+class StatusBarWidget;
 
 namespace Sourcetrail {
 
@@ -20,6 +21,7 @@ public:
 
 	bool initialize(const QStringList &arguments, QString *errorString);
 	void extensionsInitialized();
+//	void delayedInitialize();
 	ShutdownFlag aboutToShutdown();
 
 public slots:
@@ -38,6 +40,7 @@ private:
 	QTcpServer* m_server;
 	SourceTrailPluginSettingsPage* m_page;
 	SourceTrailPluginSettings m_settings;
+	StatusBarWidget* m_statusBar;
 
 };
 

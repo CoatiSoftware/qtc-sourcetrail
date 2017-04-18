@@ -31,6 +31,10 @@
 #include <memory>
 #include <QTcpServer>
 #include <cppeditor/cppeditorconstants.h>
+#include <QStatusBar>
+#include <QPushButton>
+#include <coreplugin/infobar.h>
+#include <coreplugin/statusbarwidget.h>
 
 using namespace Core;
 
@@ -49,6 +53,12 @@ SourcetrailPlugin::SourcetrailPlugin()
 			this->handleMessage(QString::fromLatin1(connection->readAll()));
 		});
 	});
+
+	m_statusBar = new StatusBarWidget();
+	m_statusBar->setWidget(new QLabel("Test"));
+	m_statusBar->setPosition(StatusBarWidget::LastLeftAligned);
+	addAutoReleasedObject(m_statusBar);
+
 }
 
 void SourcetrailPlugin::handleMessage(QString message)
@@ -81,9 +91,8 @@ void SourcetrailPlugin::restartServer()
 	m_settings.fromSettings(s);
 	stopListening();
 	startListening();
-
-	qDebug() << "restart";
 }
+
 
 
 bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorString)
@@ -104,21 +113,21 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 			this, &SourcetrailPlugin::restartServer);
 
 	// (re-)start server
-	QAction* action = new QAction(tr("Start Sourcetrail Listener"), this);
-	Core::Command* restartCommand = Core::ActionManager::registerAction(action, Constants::RESTART_ACTION_ID,
+	QAction* startAction = new QAction(tr("Start Sourcetrail Listener"), this);
+	Core::Command* restartCommand = Core::ActionManager::registerAction(startAction, Constants::RESTART_ACTION_ID,
 															 Core::Context(Core::Constants::C_GLOBAL));
 
-	connect(action, &QAction::triggered, this, & SourcetrailPlugin::restartServer);
+	connect(startAction, &QAction::triggered, this, & SourcetrailPlugin::restartServer);
 
 	// stop server
-	action = new QAction(tr("Stop Sourcetrail Listener"), this);
-	Core::Command* stopCommand = Core::ActionManager::registerAction(action, Constants::RESTART_ACTION_ID,
+	QAction* stopAction = new QAction(tr("Stop Sourcetrail Listener"), this);
+	Core::Command* stopCommand = Core::ActionManager::registerAction(stopAction, Constants::RESTART_ACTION_ID,
 															 Core::Context(Core::Constants::C_GLOBAL));
 
-	connect(action, &QAction::triggered, this, & SourcetrailPlugin::stopServer);
+	connect(stopAction, &QAction::triggered, this, & SourcetrailPlugin::stopServer);
 
 	// send location
-	action = new QAction(QIcon(Constants::CATEGORY_ICON),tr("Send Location to Sourctrail"), this);
+	QAction* action = new QAction(QIcon(Constants::CATEGORY_ICON),tr("Send Location to Sourctrail"), this);
 	Core::Command* cmd = Core::ActionManager::registerAction(action, Constants::SEND_ACTION_ID,
 															 Core::Context(Core::Constants::C_GLOBAL));
 	cmd->setDefaultKeySequence(QKeySequence(tr("Alt+S,Alt+S")));
@@ -139,15 +148,13 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 	if (ActionContainer *editorContextMenu =
 			ActionManager::actionContainer(CppEditor::Constants::M_CONTEXT))
 	{
-		editorContextMenu->addMenu(menu);
+//		editorContextMenu->addMenu(menu);
 		editorContextMenu->addAction(cmd);
 	}
 
-	// Indicator if server running / connected
-
-
 	return true;
 }
+
 
 void SourcetrailPlugin::extensionsInitialized()
 {
@@ -158,7 +165,7 @@ void SourcetrailPlugin::extensionsInitialized()
 
 //void SourcetrailPlugin::delayedInitialize()
 //{
-//	restartServer();
+////	restartServer();
 //}
 
 void SourcetrailPlugin::stopServer()
