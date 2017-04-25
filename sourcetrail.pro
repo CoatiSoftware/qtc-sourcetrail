@@ -5,18 +5,19 @@ CONFIG += include_source_dir
 DEFINES += SOURCETRAIL_LIBRARY
 
 # QtCreatorSourceTrail files
+TARGET = Sourctrail
 
 SOURCES += \
-    sourcetrailpluginsettingspage.cpp \
-    sourcetrailpluginsettings.cpp \
-    sourcetrailplugin.cpp
+    src/sourcetrailpluginsettingspage.cpp \
+    src/sourcetrailpluginsettings.cpp \
+    src/sourcetrailplugin.cpp
 
 HEADERS += \
-    sourcetrailpluginsettingspage.h \
-    sourcetrailpluginsettings.h \
-    sourcetrailplugin.h \
-    sourcetrailconstants.h \
-    sourcetrail_global.h
+    src/sourcetrailpluginsettingspage.h \
+    src/sourcetrailpluginsettings.h \
+    src/sourcetrailplugin.h \
+    src/sourcetrailconstants.h \
+    src/sourcetrail_global.h
 
 # Qt Creator linking
 
@@ -58,7 +59,7 @@ QTC_PLUGIN_RECOMMENDS += \
 include($$IDE_SOURCE_TREE/src/qtcreatorplugin.pri)
 
 FORMS += \
-    sourcetrailpluginsettingspage.ui
+    src/sourcetrailpluginsettingspage.ui
 
 RESOURCES += sourcetrail.qrc
 

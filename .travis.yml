@@ -1,0 +1,23 @@
+sudo: required
+dist: trusty
+install:
+    - sudo apt-get install -y qt5-default qttools5-dev-tool p7zip-full
+before_script:
+    - curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/linux_gcc_64_rhel66/qtcreator_dev.7z" -o qt-dev.7z
+    - 7z x -y qt-dev.7z -o"qt-src\" | findstr /b /r /c:"\<Everything is Ok"
+    - curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/linux_gcc_64_rhel66/qtcreator.7z" -o qt-bin.7z
+    - 7z x -y qt-bin.7z -o"qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
+script:
+    - qmake sourcetrail.pro -r "QTC_SOURCE=qt-src" "QTC_BUILD=qt-bin\bin" "LIBS+=-Lqt-libs" "OUTPUT_PATH=artifacts\4.2.1"
+    - make
+after_script:
+  - cmd: tar -cf $TRAVIS_BUILD_DIR/qtc-sourcetrail-linux.tar.gz $TRAVIS_BUILD_DIR/qt-bin/bin/lib/qtcreator/plugins/*
+deploy:
+  provider: releases
+  api_key:
+    secure: "RMvCoCzTj44tBCRmuVh9IXXh3IX8hWjzurmfpVB/fZU1NZEn9XBTyV5ngD9ZGw2NCRnN7t4KjHaJZCRWBroIUq0G5aH/nYz6/jnlIL4SRCiTsnl8bYHdLzJOtdXnavCIbgAVgDFoNfCsHF14XfRQakrMxSOp+4LKSYNWIdV3rBMPdL4m2OhVOtuJVzge+1IrveEuHsoAcaAlnV7GiSwpWd0CX/v8wcIQ+s6QYA1HEKOfuElVtLkKrZXWq11hO3zHLHFyXzMnwUoPQjZPkR6yOA/aZoxy4ovlooN/2Aa8EgAFnEckXFqGq4Rta6EHsg/hezNSZDzFMXE7UL9/vnqPlyVBX6cU1w29ro7EWnK+62gr9FQqbCkViIxnrJau4bB4qHK+3pvIwrubCnFXkSs9kt4lcZdR+midz35v3pV+D0ZmcEO1cQN8EDQqohpsvGZ/XiF33br/2/g4R2XlB3bDD17aRipGjsOWCoxevh4XDe5ivymhxilseIO1Af1SHbk8z4vhc6ywyppvvQgWGTYInbMEXf8m9zTvVWDZqFHmET0GABSmY0QbuLmaQZrtK6qjisXva06O2P9+Wj69d4i1JxLwxHNbJv60DLu7xGmGanom9+yJaPfJIk/Rx+trewvk9Z0LR3fOcyxnDyDFdKfbIRxDiKspLB+jZ6A97/W+9i0="
+  file: $TRAVIS_BUILD_DIR/qtc-sourcetrail-linux.tar.gz
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
