@@ -32,7 +32,7 @@ before_build:
   - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\qt-libs
 
 build_script:
-  - cmd: qmake %APPVEYOR_BUILD_FOLDER%/sourcetrail.pro -r "QTC_SOURCE=%APPVEYOR_BUILD_FOLDER%\qt-src" "QTC_BUILD=%APPVEYOR_BUILD_FOLDER%\qt-bin\bin" "LIBS+=-L%APPVEYOR_BUILD_FOLDER%\qt-libs" "OUTPUT_PATH=%APPVEYOR_BUILD_FOLDER%\artifacts\4.2.1"
+  - cmd: qmake %APPVEYOR_BUILD_FOLDER%/qtc-sourcetrail.pro -r "QTC_SOURCE=%APPVEYOR_BUILD_FOLDER%\qt-src" "QTC_BUILD=%APPVEYOR_BUILD_FOLDER%\qt-bin\bin" "LIBS+=-L%APPVEYOR_BUILD_FOLDER%\qt-libs" "OUTPUT_PATH=%APPVEYOR_BUILD_FOLDER%\artifacts\4.2.1"
   - cmd: nmake.exe
 
 after_build:
