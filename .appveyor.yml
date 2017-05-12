@@ -43,8 +43,8 @@ artifacts:
     name: '%APPVEYOR_PROJECT_NAME%'
 
 deploy:
-  release: qtc-sourcetrail-windoows_v$(appveyor_repo_tag)
-  description: 'Release '
+  #release: qtc-sourcetrail-windows_v$(appveyor_repo_tag_name)
+  description: 'Qt Creator plugin for communication with Sourcetrail'
   provider: GitHub
   auth_token:
     secure: jyuVA4RE9Rj3azDEXi2jdsZZHYMMkAmajahaeEEVUA/hPAXl82zdUQoEcPH+Y9me
