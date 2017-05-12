@@ -1,24 +1,8 @@
 language: cpp
-sudo: required
+compiler: gcc
 dist: trusty
 install:
-    # /usr/bin/gcc is 4.6 always, but gcc-X.Y is available.
-    - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9"; fi
-    # /usr/bin/clang is 3.4, lets override with modern one.
-    - if [ "$CXX" = "clang++" ] && [ "$TRAVIS_OS_NAME" = "linux" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
-    - echo ${PATH}
-    - echo ${CXX}
-    - ${CXX} --version
-    - ${CXX} -v
     - sudo apt-get install -y qt5-default qttools5-dev-tools p7zip-full
-addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - gcc-4.9
-        - g++-4.9
-        - clang
 before_script:
     - curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/linux_gcc_64_rhel66/qtcreator_dev.7z" -o qt-dev.7z
     - 7z x -y qt-dev.7z -o"qt-src"
