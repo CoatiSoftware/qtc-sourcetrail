@@ -1,6 +1,8 @@
 QT += gui network
 
 CONFIG += include_source_dir
+CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++11
 
 DEFINES += SOURCETRAIL_LIBRARY
 
@@ -43,6 +45,11 @@ isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = "/home/st4ll1/dev/qt-creator"
 ###### <dirname>_dependencies.pri, where <dirname> is the name of the directory containing the
 ###### plugin's sources.
 
+LIBS += -L$$IDE_PLUGIN_PATH/QtProject \
+        -L$$IDE_BUILD_TREE \
+        -L$$IDE_BUILD_TREE/plugins/QtProject \
+        -L$$IDE_BUILD_TREE/plugins
+
 QTC_PLUGIN_NAME = Sourcetrail
 QTC_LIB_DEPENDS += \
     # nothing here at this time
@@ -65,3 +72,8 @@ RESOURCES += sourcetrail.qrc
 
 DISTFILES += \
     Sourcetrail.json.in
+
+!isEmpty(OUTPUT_PATH) {
+    DESTDIR = $$OUTPUT_PATH
+    message("You set output path to $$DESTDIR")
+}

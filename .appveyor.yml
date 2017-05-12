@@ -32,11 +32,11 @@ before_build:
   - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\qt-libs
 
 build_script:
-  - cmd: qmake %APPVEYOR_BUILD_FOLDER%/qtc-sourcetrail.pro -r "QTC_SOURCE=%APPVEYOR_BUILD_FOLDER%\qt-src" "QTC_BUILD=%APPVEYOR_BUILD_FOLDER%\qt-bin\bin" "LIBS+=-L%APPVEYOR_BUILD_FOLDER%\qt-libs" "OUTPUT_PATH=%APPVEYOR_BUILD_FOLDER%\artifacts\4.2.1"
+  - cmd: qmake %APPVEYOR_BUILD_FOLDER%/qtc-sourcetrail.pro -r "QTC_SOURCE=%APPVEYOR_BUILD_FOLDER%\qt-src" "QTC_BUILD=%APPVEYOR_BUILD_FOLDER%\qt-bin\bin" "LIBS+=-L%APPVEYOR_BUILD_FOLDER%\qt-libs" "OUTPUT_PATH=%APPVEYOR_BUILD_FOLDER%\output"
   - cmd: nmake.exe
 
 after_build:
-  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows.zip %APPVEYOR_BUILD_FOLDER%\qt-bin\bin\lib\qtcreator\plugins\*
+  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows.zip %APPVEYOR_BUILD_FOLDER%\output\*
 
 artifacts:
   - path: 'qtc-sourcetrail-windows.zip'
@@ -46,7 +46,7 @@ deploy:
   release: qtc-sourcetrail-windoows_v$(appveyor_repo_tag)
   description: 'Release '
   provider: GitHub
-  auth_token: 
+  auth_token:
     secure: jyuVA4RE9Rj3azDEXi2jdsZZHYMMkAmajahaeEEVUA/hPAXl82zdUQoEcPH+Y9me
   draft: true
   on:

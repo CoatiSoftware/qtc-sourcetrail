@@ -1,18 +1,20 @@
 language: cpp
 compiler: gcc
 dist: trusty
+
 install:
-    - sudo apt-get install -y qt5-default qttools5-dev-tools p7zip-full
+    - sudo apt-get install -qq qt5-default qttools5-dev-tools p7zip-full
+    - sudo apt-get update -qq
 before_script:
     - curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/linux_gcc_64_rhel66/qtcreator_dev.7z" -o qt-dev.7z
     - 7z x -y qt-dev.7z -o"qt-src"
     - curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/linux_gcc_64_rhel66/qtcreator.7z" -o qt-bin.7z
     - 7z x -y qt-bin.7z -o"qt-bin"
 script:
-    - qmake qtc-sourcetrail.pro -r "QTC_SOURCE=qt-src" "QTC_BUILD=qt-bin\bin" "LIBS+=-Lqt-libs" "OUTPUT_PATH=artifacts\4.2.1"
+    - qmake qtc-sourcetrail.pro -r "QTC_SOURCE=$TRAVIS_BUILD_DIR/qt-src" "QTC_BUILD=$TRAVIS_BUILD_DIR/qt-bin/lib/qtcreator" "LIBS+=-L$TRAVIS_BUILD_DIR/qt-bin/lib/qtcreator" "OUTPUT_PATH=$TRAVIS_BUILD_DIR/output"
     - make
-after_script:
-  - tar -cf $TRAVIS_BUILD_DIR/qtc-sourcetrail-linux.tar.gz $TRAVIS_BUILD_DIR/qt-bin/bin/lib/qtcreator/plugins/*
+before_deploy:
+  - tar -cf $TRAVIS_BUILD_DIR/qtc-sourcetrail-linux.tar.gz $TRAVIS_BUILD_DIR/output/*
 deploy:
   provider: releases
   api_key:
