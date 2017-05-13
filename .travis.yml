@@ -14,7 +14,7 @@ script:
     - qmake qtc-sourcetrail.pro -r "QTC_SOURCE=$TRAVIS_BUILD_DIR/qt-src" "QTC_BUILD=$TRAVIS_BUILD_DIR/qt-bin/lib/qtcreator" "LIBS+=-L$TRAVIS_BUILD_DIR/qt-bin/lib/qtcreator" "OUTPUT_PATH=$TRAVIS_BUILD_DIR/output"
     - make
 before_deploy:
-  - tar -cf $TRAVIS_BUILD_DIR/qtc-sourcetrail-linux.tar.gz $TRAVIS_BUILD_DIR/output/*
+  - cd $TRAVIS_BUILD_DIR/output && tar -cf $TRAVIS_BUILD_DIR/qtc-sourcetrail-linux.tar.gz * && cd -
 deploy:
   provider: releases
   api_key:
