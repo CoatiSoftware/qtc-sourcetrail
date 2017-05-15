@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     cd $TRAVIS_BUILD_DIR/output && tar -cf $TRAVIS_BUILD_DIR/qtc-sourcetrail-osx.tar.gz * && cd -

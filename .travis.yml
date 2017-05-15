@@ -8,10 +8,10 @@ matrix:
         - os: osx
           compiler: clang
 
-before_install:
-    - scripts/before_install.sh
 install:
     - scripts/install.sh
+before_script:
+    - scripts/before_script.sh
 script:
     - qmake qtc-sourcetrail.pro -r "QTC_SOURCE=$TRAVIS_BUILD_DIR/qt-src" "QTC_BUILD=$TRAVIS_BUILD_DIR/qt-bin/lib/qtcreator" "LIBS+=-L$TRAVIS_BUILD_DIR/qt-bin/lib/qtcreator" "OUTPUT_PATH=$TRAVIS_BUILD_DIR/output"
     - make
