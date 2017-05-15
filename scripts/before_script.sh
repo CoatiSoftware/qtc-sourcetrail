@@ -15,5 +15,6 @@ curl -fsSL "$QT_LINK_PREFIX/$QT_SYSTEM_FOLDER/$QT_SRC_FILE" -o qt-dev.7z
 curl -fsSL "$QT_LINK_PREFIX/$QT_SYSTEM_FOLDER/$QT_BIN_FILE" -o qt-bin.7z
 7z x -y qt-bin.7z -o"qt-bin"
 
-pwd
-tree
+if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  cd qt-bin && ln -s ./ bin
+fi
