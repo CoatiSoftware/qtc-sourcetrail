@@ -10,6 +10,7 @@ const char MENU_ID[] = "QtCreatorSourceTrail.Menu";
 
 const char SEND_ACTION_ID[] = "QtCreatorSourceTrail.SendAction";
 const char RESTART_ACTION_ID[] = "QtCreatorSourcetrail.RestartAction";
+const char STOP_ACTION_ID[] = "QtCreatorSourcetrail.StopAction";
 
 } // namespace QtCreatorSourceTrail
 } // namespace Constants

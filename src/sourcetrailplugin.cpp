@@ -72,7 +72,7 @@ void SourcetrailPlugin::handleMessage(QString message)
 	}
 	if (list[0] == "moveCursor")
 	{
-		setCursor(list[1], list[2].toInt(), list[3].toInt());
+        setCursor(list[1], list[2].toInt(), list[3].toInt());
 	}
 }
 
@@ -89,11 +89,9 @@ void SourcetrailPlugin::restartServer()
 {
 	QSettings* s = Core::ICore::settings();
 	m_settings.fromSettings(s);
-	stopListening();
+    stopListening();
 	startListening();
 }
-
-
 
 bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorString)
 {
@@ -121,7 +119,7 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 
 	// stop server
 	QAction* stopAction = new QAction(tr("Stop Sourcetrail Listener"), this);
-	Core::Command* stopCommand = Core::ActionManager::registerAction(stopAction, Constants::RESTART_ACTION_ID,
+    Core::Command* stopCommand = Core::ActionManager::registerAction(stopAction, Constants::STOP_ACTION_ID,
 															 Core::Context(Core::Constants::C_GLOBAL));
 
 	connect(stopAction, &QAction::triggered, this, & SourcetrailPlugin::stopServer);
@@ -149,7 +147,7 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 			ActionManager::actionContainer(CppEditor::Constants::M_CONTEXT))
 	{
 //		editorContextMenu->addMenu(menu);
-		editorContextMenu->addAction(cmd);
+        editorContextMenu->addAction(cmd);
 	}
 
 	return true;
@@ -163,10 +161,11 @@ void SourcetrailPlugin::extensionsInitialized()
 	// plugins that depend on it are completely initialized.
 }
 
-//void SourcetrailPlugin::delayedInitialize()
-//{
-////	restartServer();
-//}
+bool SourcetrailPlugin::delayedInitialize()
+{
+    restartServer();
+    return true;
+}
 
 void SourcetrailPlugin::stopServer()
 {
@@ -221,11 +220,11 @@ void SourcetrailPlugin::sendPing()
 
 void SourcetrailPlugin::setCursor(QString file, int line, int column)
 {
-	IEditor* editor = Core::EditorManager::openEditorAt(file, line, column);
-	if (editor)
-	{
-
-	}
+    Core::EditorManager::openEditorAt(file, line, column);
+//    IEditor* editor = Core::EditorManager::openEditorAt(file, line, column);
+//    if (editor)
+//	{
+//	}
 }
 
 void SourcetrailPlugin::sendLocation()

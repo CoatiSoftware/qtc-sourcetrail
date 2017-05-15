@@ -19,9 +19,9 @@ public:
 	SourcetrailPlugin();
 	~SourcetrailPlugin();
 
-	bool initialize(const QStringList &arguments, QString *errorString);
+    bool initialize(const QStringList &arguments, QString *errorString) override;
 	void extensionsInitialized();
-//	void delayedInitialize();
+    bool delayedInitialize();
 	ShutdownFlag aboutToShutdown();
 
 public slots:
