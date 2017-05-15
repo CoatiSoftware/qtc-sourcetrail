@@ -20,9 +20,9 @@ public:
 	~SourcetrailPlugin();
 
     bool initialize(const QStringList &arguments, QString *errorString) override;
-	void extensionsInitialized();
-    bool delayedInitialize();
-	ShutdownFlag aboutToShutdown();
+	void extensionsInitialized() override;
+    bool delayedInitialize() override;
+	ShutdownFlag aboutToShutdown() override;
 
 public slots:
 	void restartServer();

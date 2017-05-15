@@ -14,3 +14,6 @@ curl -fsSL "$QT_LINK_PREFIX/$QT_SYSTEM_FOLDER/$QT_SRC_FILE" -o qt-dev.7z
 7z x -y qt-dev.7z -o"qt-src"
 curl -fsSL "$QT_LINK_PREFIX/$QT_SYSTEM_FOLDER/$QT_BIN_FILE" -o qt-bin.7z
 7z x -y qt-bin.7z -o"qt-bin"
+
+pwd
+tree
