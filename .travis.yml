@@ -22,6 +22,7 @@ deploy:
   api_key:
     secure: "RMvCoCzTj44tBCRmuVh9IXXh3IX8hWjzurmfpVB/fZU1NZEn9XBTyV5ngD9ZGw2NCRnN7t4KjHaJZCRWBroIUq0G5aH/nYz6/jnlIL4SRCiTsnl8bYHdLzJOtdXnavCIbgAVgDFoNfCsHF14XfRQakrMxSOp+4LKSYNWIdV3rBMPdL4m2OhVOtuJVzge+1IrveEuHsoAcaAlnV7GiSwpWd0CX/v8wcIQ+s6QYA1HEKOfuElVtLkKrZXWq11hO3zHLHFyXzMnwUoPQjZPkR6yOA/aZoxy4ovlooN/2Aa8EgAFnEckXFqGq4Rta6EHsg/hezNSZDzFMXE7UL9/vnqPlyVBX6cU1w29ro7EWnK+62gr9FQqbCkViIxnrJau4bB4qHK+3pvIwrubCnFXkSs9kt4lcZdR+midz35v3pV+D0ZmcEO1cQN8EDQqohpsvGZ/XiF33br/2/g4R2XlB3bDD17aRipGjsOWCoxevh4XDe5ivymhxilseIO1Af1SHbk8z4vhc6ywyppvvQgWGTYInbMEXf8m9zTvVWDZqFHmET0GABSmY0QbuLmaQZrtK6qjisXva06O2P9+Wj69d4i1JxLwxHNbJv60DLu7xGmGanom9+yJaPfJIk/Rx+trewvk9Z0LR3fOcyxnDyDFdKfbIRxDiKspLB+jZ6A97/W+9i0="
   file: $TRAVIS_BUILD_DIR/qtc-sourcetrail-$TRAVIS_OS_NAME.tar.gz
+  overwrite: true
   skip_cleanup: true
   draft: true
   on:
