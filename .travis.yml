@@ -17,7 +17,7 @@ script:
     - scripts/script.sh
 before_deploy:
     # - scripts/before_deploy.sh
-    - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then "$TRAVIS_BUILD_DIR/scripts/osx-fix.sh" $(find $TRAVIS_BUILD_DIR/build/plugins/ -name '*.dylib') ; fi
+    - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then "$TRAVIS_BUILD_DIR/scripts/osx-fix.sh" $(find $TRAVIS_BUILD_DIR/ouput/ -name '*.dylib') ; fi
     - cd $TRAVIS_BUILD_DIR/output && zip -r $TRAVIS_BUILD_DIR/qtc-sourcetrail-$TRAVIS_OS_NAME * && cd -
 deploy:
   provider: releases
