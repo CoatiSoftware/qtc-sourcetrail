@@ -4,7 +4,7 @@ Qt Creator Plugin for communication with [Sourcetrail](https://sourcetrail.com)
 
 ## Install
 
-Download the libary and put it into the qtcreator plugins folder.
+Download the libary from [Releases](https://github.com/CoatiSoftware/qtc-sourcetrail/releases) and put it into the qtcreator plugins folder.
 Folder location in Help -> System Information... -> PluginsPath
 
 ## Settings
