@@ -56,6 +56,8 @@ void SourceTrailPluginSettingsPage::apply()
 	if (m_settings != setting)
 	{
 		m_settings = setting;
+		QSettings* s = Core::ICore::settings();
+		m_settings.toSettings(s);
 		emit SourceTrailPluginSettingsChanged(setting);
 	}
 
