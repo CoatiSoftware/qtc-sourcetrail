@@ -7,6 +7,10 @@
 
 class QTcpServer;
 class StatusBarWidget;
+class QAction;
+namespace Core {
+	class Command;
+}
 
 namespace Sourcetrail {
 
@@ -41,6 +45,7 @@ private:
 	SourceTrailPluginSettingsPage* m_page;
 	SourceTrailPluginSettings m_settings;
 	StatusBarWidget* m_statusBar;
+	Core::Command* m_statusCommand;
 
 };
 

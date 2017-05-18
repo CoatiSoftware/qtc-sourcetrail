@@ -131,6 +131,11 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 	cmd->setDefaultKeySequence(QKeySequence(tr("Alt+S,Alt+S")));
 	connect(action, &QAction::triggered, this, &SourcetrailPlugin::triggerAction);
 
+	// action to show if the server is running TODO: move to statusbar or ...
+	QAction* statusAction = new QAction(tr("Server Status:" ), this);
+	statusAction->setEnabled(false);
+	m_statusCommand = Core::ActionManager::registerAction(statusAction, Constants::STATUS_ACTION_ID,
+															 Core::Context(Core::Constants::C_GLOBAL));
 
 	// sourctrail menu
 	Core::ActionContainer *menu = Core::ActionManager::createMenu(Constants::MENU_ID);
@@ -139,6 +144,7 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 	menu->addAction(cmd);
 	menu->addAction(restartCommand);
 	menu->addAction(stopCommand);
+	menu->addAction(m_statusCommand);
 	Core::ActionManager::actionContainer(Core::Constants::M_TOOLS)->addMenu(menu);
 
 
@@ -170,6 +176,7 @@ bool SourcetrailPlugin::delayedInitialize()
 void SourcetrailPlugin::stopServer()
 {
 	stopListening();
+	m_statusCommand->action()->setText(Constants::SERVER_STOPPED);
 }
 
 void SourcetrailPlugin::startListening()
@@ -179,6 +186,10 @@ void SourcetrailPlugin::startListening()
 		QMessageBox::warning(Core::ICore::mainWindow(),
 								 tr("SourceTrailPlugin Tcp Server"),
 								 tr("Could not listen to port"));
+	}
+	else
+	{
+		m_statusCommand->action()->setText(Constants::SERVER_RUNNING);
 	}
 }
 
