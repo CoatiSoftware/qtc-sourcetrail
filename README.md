@@ -1,7 +1,6 @@
 
 [![Build
-Status](https://travis-ci.org/CoatiSoftware/qtc-sourcetrail.svg?branch=master])](https://travis-ci.org/CoatiSoftware/qtc-sourcetrail)
-
+Status](https://travis-ci.org/CoatiSoftware/qtc-sourcetrail.svg?branch=master)](https://travis-ci.org/CoatiSoftware/qtc-sourcetrail)
 [![Build status](https://ci.appveyor.com/api/projects/status/6luot2mj145ha6j0/branch/master?svg=true)](https://ci.appveyor.com/project/st4ll1/qtc-sourcetrail/branch/master)
 
 
