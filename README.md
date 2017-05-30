@@ -9,10 +9,12 @@ Status](https://travis-ci.org/CoatiSoftware/qtc-sourcetrail.svg?branch=master)](
 
 Qt Creator Plugin for communication with [Sourcetrail](https://sourcetrail.com)
 
+
 ## Install
 
 Download the libary from [Releases](https://github.com/CoatiSoftware/qtc-sourcetrail/releases) and put it into the qtcreator plugins folder.
 Folder location in Help -> System Information... -> PluginsPath
+(Releases are built for version 4.2.x and 4.3.x)
 
 ## Settings
 

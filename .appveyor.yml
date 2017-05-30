@@ -14,10 +14,10 @@ environment:
   VSVER: 14.0
   BINTRAY_KEY:
     secure: 64COF2Ng3AdKqw6BEQqhlTu8G1j0F43qv6zZ6tg4VLbVCxXBxB2kW42COoqSiBJA
+  matrix:
+    - QTC_VER: 4.2
+    - QTC_VER: 4.3
 
-matrix:
-  - QTC_VER: 4.2
-  - QTC_VER: 4.3
 
 configuration:
   - Release
@@ -40,10 +40,10 @@ build_script:
   - cmd: nmake.exe
 
 after_build:
-  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows.zip %APPVEYOR_BUILD_FOLDER%\output\*
+  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows-%QTC_VER%.zip %APPVEYOR_BUILD_FOLDER%\output\*
 
 artifacts:
-  - path: 'qtc-sourcetrail-windows.zip'
+  - path: 'qtc-sourcetrail-windows-%QTC_VER%.zip'
     name: '%APPVEYOR_PROJECT_NAME%'
 
 deploy:

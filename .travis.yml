@@ -15,6 +15,9 @@ matrix:
         - os: osx
           compiler: clang
           env: QTC_VER=4.2 QTC_DL=mac_x64
+        - os: osx
+          compiler: clang
+          env: QTC_VER=4.3 QTC_DL=mac_x64
 
 install:
     - scripts/install.sh
