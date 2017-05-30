@@ -15,14 +15,18 @@ environment:
   BINTRAY_KEY:
     secure: 64COF2Ng3AdKqw6BEQqhlTu8G1j0F43qv6zZ6tg4VLbVCxXBxB2kW42COoqSiBJA
 
+matrix:
+  - QTC_VER: 4.2
+  - QTC_VER: 4.3
+
 configuration:
   - Release
 
 # Download and unpack QtC sources and binaries
 install:
-  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/windows_vs2015_32/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
   - cmd: 7z x -y qt-dev.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-src\" | findstr /b /r /c:"\<Everything is Ok"
-  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/4.2/4.2.0/installer_source/windows_vs2015_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
   - cmd: 7z x -y qt-bin.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
 
 # Setup an environment and generate import libs
