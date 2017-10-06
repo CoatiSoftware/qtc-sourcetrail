@@ -38,10 +38,10 @@ build_script:
   - cmd: nmake.exe
 
 after_build:
-  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows.zip %APPVEYOR_BUILD_FOLDER%\output\*
+  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows_x86.zip %APPVEYOR_BUILD_FOLDER%\output\*
 
 artifacts:
-  - path: 'qtc-sourcetrail-windows-qtc%QTC_VER%.zip'
+  - path: 'qtc-sourcetrail-windows_x86.zip'
     name: '%APPVEYOR_PROJECT_NAME%'
 
 deploy:
