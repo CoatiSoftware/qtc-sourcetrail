@@ -9,6 +9,8 @@ Status](https://travis-ci.org/CoatiSoftware/qtc-sourcetrail.svg?branch=master)](
 
 Qt Creator Plugin for communication with [Sourcetrail](https://sourcetrail.com)
 
+For Qt Creator 4.4.x
+
 
 ## Install
 
