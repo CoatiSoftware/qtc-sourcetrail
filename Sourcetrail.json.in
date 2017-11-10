@@ -5,7 +5,7 @@
 	\"Vendor\" : \"Coati Software OG\",
     \"Copyright\" : \"Coati Software OG\",
 	\"License\" : \"The MIT License (MIT)\",
-    \"Description\" : \"Connect QtCreator with SourceTrail\",
+    \"Description\" : \"Connect QtCreator with Sourcetrail\",
     \"Url\" : \"https://sourcetrail.com\",
     $$dependencyList
 }
