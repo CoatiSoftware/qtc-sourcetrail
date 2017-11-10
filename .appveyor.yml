@@ -6,31 +6,47 @@ version: 1.0.{build}
 # Official QtC binaries are built
 # with msvc2015-x86
 os: Visual Studio 2015
-platform: x86
+
 environment:
-  VERSION: 1.0
-  OS_NAME: win32
   QTDIR: C:\Qt\5.8\msvc2015
   VSVER: 14.0
   BINTRAY_KEY:
     secure: 64COF2Ng3AdKqw6BEQqhlTu8G1j0F43qv6zZ6tg4VLbVCxXBxB2kW42COoqSiBJA
-  QTC_VER: 4.4
-
+  matrix:
+    - platform: x86  
+      QTC_VER: 4.2
+      
+    - platform: x86  
+      QTC_VER: 4.3
+      
+    - platform: x64  
+      QTC_VER: 4.3
+    
+    - platform: x86  
+      QTC_VER: 4.4
+    
+    - platform: x64  
+      QTC_VER: 4.4
 
 configuration:
   - Release
 
 # Download and unpack QtC sources and binaries
 install:
-  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
+  - cmd: IF %PLATFORM% == x86 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
+  - cmd: IF %PLATFORM% == x64 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_64/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
   - cmd: 7z x -y qt-dev.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-src\" | findstr /b /r /c:"\<Everything is Ok"
-  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  - cmd: IF %PLATFORM% == x86 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  - cmd: IF %PLATFORM% == x64 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_64/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
   - cmd: 7z x -y qt-bin.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
 
 # Setup an environment and generate import libs
 before_build:
+  - cmd: echo %QTDIR%
+  - cmd: IF %PLATFORM% == x64 set QTDIR=%QTDIR%_64
+  - cmd: echo %QTDIR%
   - cmd: '%QTDIR%\bin\qtenv2.bat'
-  - cmd: '"%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" x86'
+  - cmd: '"%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" %PLATFORM%'
   - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\qt-libs
 
 build_script:
@@ -38,10 +54,10 @@ build_script:
   - cmd: nmake.exe
 
 after_build:
-  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows_x86.zip %APPVEYOR_BUILD_FOLDER%\output\*
+  - cmd: 7z a %APPVEYOR_BUILD_FOLDER%\qtc-sourcetrail-windows-%PLATFORM%-qtc%QTC_VER%.zip %APPVEYOR_BUILD_FOLDER%\output\*
 
 artifacts:
-  - path: 'qtc-sourcetrail-windows_x86.zip'
+  - path: 'qtc-sourcetrail-windows-%PLATFORM%-qtc%QTC_VER%.zip'
     name: '%APPVEYOR_PROJECT_NAME%'
 
 deploy:

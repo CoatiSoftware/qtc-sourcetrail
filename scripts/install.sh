@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    brew update
     brew install p7zip
-    # brew install wget
     brew install qt
     brew link --force qt
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
