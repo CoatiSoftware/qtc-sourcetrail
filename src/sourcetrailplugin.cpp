@@ -34,7 +34,6 @@
 #include <QStatusBar>
 #include <QPushButton>
 #include <coreplugin/infobar.h>
-#include <coreplugin/statusbarwidget.h>
 
 using namespace Core;
 
@@ -53,12 +52,6 @@ SourcetrailPlugin::SourcetrailPlugin()
 			this->handleMessage(QString::fromLatin1(connection->readAll()));
 		});
 	});
-
-//	m_statusBar = new StatusBarWidget();
-//	m_statusBar->setWidget(new QLabel("Test"));
-//	m_statusBar->setPosition(StatusBarWidget::LastLeftAligned);
-//	addAutoReleasedObject(m_statusBar);
-
 }
 
 void SourcetrailPlugin::handleMessage(QString message)
@@ -106,7 +99,6 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
 	Q_UNUSED(errorString)
 
 	m_page = new SourceTrailPluginSettingsPage(this);
-	addAutoReleasedObject(m_page);
 	connect(m_page, &SourceTrailPluginSettingsPage::SourceTrailPluginSettingsChanged,
 			this, &SourcetrailPlugin::restartServer);
 
