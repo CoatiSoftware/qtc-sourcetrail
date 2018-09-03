@@ -8,15 +8,14 @@
 #  define QTCREATORSOURCETRAILSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
-
 namespace Sourcetrail
 {
 
-enum SourceTrailPluginOptions
+enum SourcetrailPluginOptions
 {
-	hostAddress = 1,
-	pluginPort = 2,
-	sourceTrailPort = 3
+    hostAddress = 1,
+    pluginPort = 2,
+    sourcetrailPort = 3
 };
 
-}
+} // namespace Sourcetrail
