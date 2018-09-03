@@ -6,11 +6,11 @@
 #include <coreplugin/actionmanager/actioncontainer.h>
 #include <coreplugin/editormanager/editormanager.h>
 #include <coreplugin/icore.h>
+#include <coreplugin/messagemanager.h>
 #include <cppeditor/cppeditorconstants.h>
 #include <texteditor/texteditor.h>
 
 #include <QAction>
-#include <QMessageBox> // TODO: change text here
 #include <QMenu>
 #include <QTcpSocket>
 #include <QTcpServer>
@@ -158,9 +158,7 @@ void SourcetrailPlugin::startListening()
 {
     if (!m_server->listen(QHostAddress::LocalHost, m_settings.m_sourcetrailPort))
     {
-        QMessageBox::warning(Core::ICore::mainWindow(),
-                             tr("SourcetrailPlugin Tcp Server"),
-                             tr("Could not listen to port"));
+        MessageManager::write(QString{"Sourcetrail Plugin TCP Server - Could not listen to port %1"}.arg(m_settings.m_sourcetrailPort));
     }
     else
     {
@@ -225,9 +223,7 @@ void SourcetrailPlugin::sendLocation()
     }
     else
     {
-        QMessageBox::information(Core::ICore::mainWindow(),
-                                 tr("Action Triggered"),
-                                 tr("No cursor position sent, no editor"));
+        MessageManager::write(QString{"Sourcetrail Plugin TCP Server - Action Triggered but no editor"});
     }
 }
 
