@@ -26,7 +26,7 @@
     <item>
      <widget class="QLabel" name="SourceTrailPluginTitle">
       <property name="text">
-       <string>Source Trail Plugin</string>
+       <string>Sourcetrail Plugin</string>
       </property>
      </widget>
     </item>
@@ -51,14 +51,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="hostaddresslabel">
         <property name="text">
-         <string>Host Adress:</string>
+         <string>Host Address:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="sourcetrailportlabel">
         <property name="text">
-         <string>SourceTrail Port:</string>
+         <string>Sourcetrail Port:</string>
         </property>
        </widget>
       </item>
@@ -74,7 +74,7 @@
       <item row="1" column="0" colspan="2">
        <widget class="QLabel" name="pluginPortlabel">
         <property name="text">
-         <string>PluginPort</string>
+         <string>Plugin Port</string>
         </property>
        </widget>
       </item>
