@@ -10,6 +10,8 @@ Qt Creator Plugin for communication with [Sourcetrail](https://sourcetrail.com)
 
 Supported Qt Creator Versions:
 * Qt Creator 4.7.x
+* Qt Creator 4.6.x
+* Qt Creator 4.5.x
 * Qt Creator 4.4.x
 * Qt Creator 4.3.x
 * Qt Creator 4.2.x
@@ -30,7 +32,7 @@ In the menu Tools -> Options ... -> Environment -> Keyboard and use the filter t
 
 ## Building the Plugin
 
-Run the build.sh script(curl and 7z needed to run) or look into it to see what is needed to build the plugin.
+Run the build.sh script (curl and 7z needed to run) or look into it to see what is needed to build the plugin.
 
 ## Creating a new Release
 
