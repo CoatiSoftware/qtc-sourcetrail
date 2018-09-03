@@ -13,20 +13,38 @@ environment:
   BINTRAY_KEY:
     secure: 64COF2Ng3AdKqw6BEQqhlTu8G1j0F43qv6zZ6tg4VLbVCxXBxB2kW42COoqSiBJA
   matrix:
-    - platform: x86  
+    - platform: x86
       QTC_VER: 4.2
       
-    - platform: x86  
+    - platform: x86
       QTC_VER: 4.3
       
-    - platform: x64  
+    - platform: x64
       QTC_VER: 4.3
     
-    - platform: x86  
+    - platform: x86
       QTC_VER: 4.4
     
-    - platform: x64  
+    - platform: x64
       QTC_VER: 4.4
+    
+    - platform: x86
+      QTC_VER: 4.5
+    
+    - platform: x64
+      QTC_VER: 4.5
+    
+    - platform: x86
+      QTC_VER: 4.6
+    
+    - platform: x64
+      QTC_VER: 4.6
+    
+    - platform: x86
+      QTC_VER: 4.7
+    
+    - platform: x64
+      QTC_VER: 4.7
 
 configuration:
   - Release
