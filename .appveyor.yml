@@ -8,7 +8,7 @@ version: 0.5.{build}
 os: Visual Studio 2015
 
 environment:
-  QTDIR: C:\Qt\5.8\msvc2015
+  QTDIR: C:\Qt\5.11\msvc2015
   VSVER: 14.0
   BINTRAY_KEY:
     secure: 64COF2Ng3AdKqw6BEQqhlTu8G1j0F43qv6zZ6tg4VLbVCxXBxB2kW42COoqSiBJA
