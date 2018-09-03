@@ -8,45 +8,44 @@
 class QTcpServer;
 class StatusBarWidget;
 class QAction;
-namespace Core {
-	class Command;
-}
+
+namespace Core { class Command; }
 
 namespace Sourcetrail {
 
 class SourcetrailPlugin : public ExtensionSystem::IPlugin
 {
-	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "Sourcetrail.json")
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "Sourcetrail.json")
 
 public:
-	SourcetrailPlugin();
-	~SourcetrailPlugin();
+    SourcetrailPlugin();
+    ~SourcetrailPlugin();
 
     bool initialize(const QStringList &arguments, QString *errorString) override;
-	void extensionsInitialized() override;
+    void extensionsInitialized() override;
     bool delayedInitialize() override;
-	ShutdownFlag aboutToShutdown() override;
+    ShutdownFlag aboutToShutdown() override;
 
 public slots:
-	void restartServer();
-	void stopServer();
+    void restartServer();
+    void stopServer();
 
 private:
-	void handleMessage(QString message);
-	void triggerAction();
-	void sendPing();
-	void sendLocation();
-	void startListening();
-	void stopListening();
-	void sendMessage(QString message);
-	void setCursor(QString file, int line, int column);
-	QTcpServer* m_server;
-	SourceTrailPluginSettingsPage* m_page;
-	SourceTrailPluginSettings m_settings;
-	StatusBarWidget* m_statusBar;
-	Core::Command* m_statusCommand;
+    void handleMessage(QString message);
+    void triggerAction();
+    void sendPing();
+    void sendLocation();
+    void startListening();
+    void stopListening();
+    void sendMessage(QString message);
+    void setCursor(QString file, int line, int column);
 
+    QTcpServer *m_server;
+    SourcetrailPluginSettingsPage *m_page;
+    SourcetrailPluginSettings m_settings;
+    StatusBarWidget *m_statusBar;
+    Core::Command *m_statusCommand;
 };
 
-} // namespace SourceTrailPlugin
+} // namespace Sourcetrail

@@ -1,52 +1,40 @@
 #include "sourcetrailpluginsettings.h"
 
 #include <QSettings>
-#include <extensionsystem/pluginmanager.h>
-#include <coreplugin/icore.h>
 
-static const char settingsGroup[]      = "SourceTrail";
+static const char settingsGroup[]      = "Sourcetrail";
 static const char addressKey[]         = "Address";
 static const char pluginPortKey[]      = "PluginPort";
-static const char sourceTrailPortKey[] = "SourceTrailPort";
+static const char sourcetrailPortKey[] = "SourcetrailPort";
 
-using namespace Sourcetrail;
+namespace Sourcetrail {
 
-
-void SourceTrailPluginSettings::fromSettings(QSettings *s)
+void SourcetrailPluginSettings::fromSettings(QSettings *s)
 {
-	// assign defaults
-	*this = SourceTrailPluginSettings();
+    // assign defaults
+    *this = SourcetrailPluginSettings();
 
-	s->beginGroup(settingsGroup);
-	m_hostAddress = s->value(addressKey, m_hostAddress).toString();
-	m_pluginPort = s->value(pluginPortKey, m_pluginPort).toInt();
-	m_sourceTrailPort = s->value(sourceTrailPortKey, m_sourceTrailPort).toInt();
-	s->endGroup();
+    s->beginGroup(settingsGroup);
+    m_hostAddress = s->value(addressKey, m_hostAddress).toString();
+    m_pluginPort = s->value(pluginPortKey, m_pluginPort).toInt();
+    m_sourcetrailPort = s->value(sourcetrailPortKey, m_sourcetrailPort).toInt();
+    s->endGroup();
 }
 
-void SourceTrailPluginSettings::toSettings(QSettings *s) const
+void SourcetrailPluginSettings::toSettings(QSettings *s) const
 {
-	s->beginGroup(QLatin1String(settingsGroup));
-	s->setValue(QLatin1String(addressKey), m_hostAddress);
-	s->setValue(QLatin1String(pluginPortKey), m_pluginPort);
-	s->setValue(QLatin1String(sourceTrailPortKey), m_sourceTrailPort);
-	s->endGroup();
+    s->beginGroup(QLatin1String(settingsGroup));
+    s->setValue(QLatin1String(addressKey), m_hostAddress);
+    s->setValue(QLatin1String(pluginPortKey), m_pluginPort);
+    s->setValue(QLatin1String(sourcetrailPortKey), m_sourcetrailPort);
+    s->endGroup();
 }
 
-bool SourceTrailPluginSettings::equals(const SourceTrailPluginSettings &stps) const
+bool SourcetrailPluginSettings::equals(const SourcetrailPluginSettings &stps) const
 {
-	return  m_hostAddress     == stps.m_hostAddress
-		&& m_pluginPort       == stps.m_pluginPort
-		&& m_sourceTrailPort  == stps.m_sourceTrailPort
-		;
+    return  m_hostAddress == stps.m_hostAddress
+            && m_pluginPort == stps.m_pluginPort
+            && m_sourcetrailPort == stps.m_sourcetrailPort;
 }
 
-void SourceTrailPluginSettings::debugOutput() const
-{
-	qDebug() << "sourcetrail plugin settings:";
-	qDebug() << "address    : " << m_hostAddress;
-	qDebug() << "plugin     : " << m_pluginPort;
-	qDebug() << "sourcetrail: " << m_sourceTrailPort;
-
-}
-
+} // namespace Sourcetrail
