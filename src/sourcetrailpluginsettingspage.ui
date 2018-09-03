@@ -51,7 +51,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="hostaddresslabel">
         <property name="text">
-         <string>Host Adress:</string>
+         <string>Host Address:</string>
         </property>
        </widget>
       </item>
