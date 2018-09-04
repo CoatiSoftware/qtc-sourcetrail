@@ -2,10 +2,10 @@
     \"Name\" : \"Sourcetrail\",
 	\"Version\" : \"$$QTCREATOR_VERSION\",
 	\"CompatVersion\" : \"$$QTCREATOR_COMPAT_VERSION\",
-	\"Vendor\" : \"Coati Software OG\",
-    \"Copyright\" : \"Coati Software OG\",
+        \"Vendor\" : \"Coati Software KG\",
+    \"Copyright\" : \"Coati Software KG\",
 	\"License\" : \"The MIT License (MIT)\",
-    \"Description\" : \"Connect QtCreator with Sourcetrail\",
+    \"Description\" : \"Synchronize QtCreator with Sourcetrail\",
     \"Url\" : \"https://sourcetrail.com\",
     $$dependencyList
 }
