@@ -45,6 +45,12 @@ environment:
     
     - platform: x64
       QTC_VER: 4.7
+    
+    - platform: x86
+      QTC_VER: 4.8
+    
+    - platform: x64
+      QTC_VER: 4.8
 
 configuration:
   - Release
