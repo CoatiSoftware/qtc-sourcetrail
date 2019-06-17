@@ -22,6 +22,11 @@ matrix:
           sudo: required
           dist: trusty
           env: QTC_VER=4.8 QTC_DL=linux_gcc_64_rhel72
+        - os: linux
+          compiler: gcc
+          sudo: required
+          dist: trusty
+          env: QTC_VER=4.9 QTC_DL=linux_gcc_64_rhel72
         - os: osx
           compiler: clang
           env: QTC_VER=4.5 QTC_DL=mac_x64
@@ -34,6 +39,9 @@ matrix:
         - os: osx
           compiler: clang
           env: QTC_VER=4.8 QTC_DL=mac_x64
+        - os: osx
+          compiler: clang
+          env: QTC_VER=4.9 QTC_DL=mac_x64
 
 install:
     - scripts/install.sh
