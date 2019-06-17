@@ -1,6 +1,6 @@
 {
     \"Name\" : \"Sourcetrail\",
-        \"Version\" : \"0.7\",
+        \"Version\" : \"0.8.0\",
 	\"CompatVersion\" : \"$$QTCREATOR_COMPAT_VERSION\",
         \"Vendor\" : \"Coati Software KG\",
     \"Copyright\" : \"Coati Software KG\",
