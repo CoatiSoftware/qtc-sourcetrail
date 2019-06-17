@@ -15,38 +15,56 @@ environment:
   matrix:    
     - platform: x86
       QTC_VER: 4.5
+      VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.5
+      VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.6
+      VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.6
+      VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.7
+      VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.7
+      VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.8
+      VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.8
+      VS_VER: 2015
+    
+    - platform: x86
+      QTC_VER: 4.9
+      VS_VER: 2017
+    
+    - platform: x64
+      QTC_VER: 4.9
+      VS_VER: 2017
 
 configuration:
   - Release
 
 # Download and unpack QtC sources and binaries
 install:
-  - cmd: IF %PLATFORM% == x86 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
-  - cmd: IF %PLATFORM% == x64 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_64/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
+  - cmd: IF %VS_VER% == 2015 IF %PLATFORM% == x86 SET download_dir=windows_vs%VS_VER%_32
+  - cmd: IF %VS_VER% == 2015 IF %PLATFORM% == x64 SET download_dir=windows_vs%VS_VER%_64
+  - cmd: IF %VS_VER% == 2017 SET download_dir=windows_msvc%VS_VER%_%PLATFORM%  
+  - cmd: echo %download_dir%
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/%download_dir%/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
   - cmd: 7z x -y qt-dev.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-src\" | findstr /b /r /c:"\<Everything is Ok"
-  - cmd: IF %PLATFORM% == x86 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_32/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
-  - cmd: IF %PLATFORM% == x64 curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/windows_vs2015_64/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/%download_dir%/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
   - cmd: 7z x -y qt-bin.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
 
 # Setup an environment and generate import libs
