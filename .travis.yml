@@ -6,42 +6,51 @@ matrix:
           compiler: gcc
           sudo: required
           dist: trusty
-          env: QTC_VER=4.5 QTC_DL=linux_gcc_64_rhel72
+          env: QTC_VER=4.5
         - os: linux
           compiler: gcc
           sudo: required
           dist: trusty
-          env: QTC_VER=4.6 QTC_DL=linux_gcc_64_rhel72
+          env: QTC_VER=4.6
         - os: linux
           compiler: gcc
           sudo: required
           dist: trusty
-          env: QTC_VER=4.7 QTC_DL=linux_gcc_64_rhel72
+          env: QTC_VER=4.7
         - os: linux
           compiler: gcc
           sudo: required
           dist: trusty
-          env: QTC_VER=4.8 QTC_DL=linux_gcc_64_rhel72
+          env: QTC_VER=4.8
         - os: linux
           compiler: gcc
           sudo: required
           dist: trusty
-          env: QTC_VER=4.9 QTC_DL=linux_gcc_64_rhel72
+          env: QTC_VER=4.9
+        - os: linux
+          compiler: gcc
+          sudo: required
+          dist: trusty
+          env: QTC_VER=4.10
+          
         - os: osx
           compiler: clang
-          env: QTC_VER=4.5 QTC_DL=mac_x64
+          env: QTC_VER=4.5
         - os: osx
           compiler: clang
-          env: QTC_VER=4.6 QTC_DL=mac_x64
+          env: QTC_VER=4.6
         - os: osx
           compiler: clang
-          env: QTC_VER=4.7 QTC_DL=mac_x64
+          env: QTC_VER=4.7
         - os: osx
           compiler: clang
-          env: QTC_VER=4.8 QTC_DL=mac_x64
+          env: QTC_VER=4.8
         - os: osx
           compiler: clang
-          env: QTC_VER=4.9 QTC_DL=mac_x64
+          env: QTC_VER=4.9
+        - os: osx
+          compiler: clang
+          env: QTC_VER=4.10
 
 install:
     - scripts/install.sh

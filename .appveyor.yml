@@ -52,6 +52,14 @@ environment:
     - platform: x64
       QTC_VER: 4.9
       VS_VER: 2017
+    
+    - platform: x86
+      QTC_VER: 4.10
+      VS_VER: 2017
+    
+    - platform: x64
+      QTC_VER: 4.10
+      VS_VER: 2017
 
 configuration:
   - Release
