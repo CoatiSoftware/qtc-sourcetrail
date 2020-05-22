@@ -1,7 +1,7 @@
 # Appveyor project configuration file
 # Build the plugin on Windows environment
 
-version: 0.8.2.{build}
+version: 0.8.3.{build}
 
 # Official QtC binaries are built
 # with msvc2015-x86
