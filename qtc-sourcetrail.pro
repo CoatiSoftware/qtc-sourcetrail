@@ -7,7 +7,7 @@ QMAKE_CXXFLAGS += -std=c++11
 DEFINES += SOURCETRAIL_LIBRARY
 
 # QtCreatorSourcetrail files
-TARGET = Sourctrail
+TARGET = Sourcetrail
 
 SOURCES += \
     src/sourcetrailpluginsettingspage.cpp \
