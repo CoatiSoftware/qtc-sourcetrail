@@ -99,7 +99,7 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
     connect(stopAction, &QAction::triggered, this,  &SourcetrailPlugin::stopServer);
 
     // send location
-    QAction *action = new QAction(QIcon(Constants::CATEGORY_ICON),tr("Send Location to Sourctrail"), this);
+    QAction *action = new QAction(QIcon(Constants::CATEGORY_ICON),tr("Send Location to Sourcetrail"), this);
     Core::Command *cmd = Core::ActionManager::registerAction(action,
                                                              Constants::SEND_ACTION_ID,
                                                              Core::Context(Core::Constants::C_GLOBAL));
@@ -113,7 +113,7 @@ bool SourcetrailPlugin::initialize(const QStringList &arguments, QString *errorS
                                                           Constants::STATUS_ACTION_ID,
                                                           Core::Context(Core::Constants::C_GLOBAL));
 
-    // sourctrail menu
+    // sourcetrail menu
     Core::ActionContainer *menu = Core::ActionManager::createMenu(Constants::MENU_ID);
     menu->menu()->setTitle(tr("Sourcetrail"));
     menu->menu()->setIcon(QIcon(Constants::CATEGORY_ICON));
