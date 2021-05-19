@@ -28,11 +28,11 @@ jobs:
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++"
           }
-        - {
-            name: "macOS Latest Clang", artifact: "macOS-x64",
-            os: macos-latest,
-            cc: "clang", cxx: "clang++"
-          }
+#        - {
+#            name: "macOS Latest Clang", artifact: "macOS-x64",
+#            os: macos-latest,
+#            cc: "clang", cxx: "clang++"
+#          }
 
     steps:
     - uses: actions/checkout@v1
