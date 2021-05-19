@@ -14,7 +14,7 @@ SourcetrailPluginSettingsPage::SourcetrailPluginSettingsPage(QObject *parent) :
     setId(Constants::CATEGORY_ID);
     setDisplayName(tr(Constants::CATEGORY));
 
-    setCategory(Core::Id(Constants::CATEGORY_ID));
+    setCategory(Utils::Id(Constants::CATEGORY_ID));
     setDisplayCategory(QLatin1String(Constants::CATEGORY));
     setCategoryIcon(Utils::Icon(Constants::CATEGORY_ICON));
 
