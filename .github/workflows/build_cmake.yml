@@ -177,7 +177,13 @@ jobs:
 
         file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/qtcreator" qtc_dir)
         # Save the path for other steps
-        message("::set-output name=qtc_dir::${qtc_dir}")
+        if ("${{ runner.os }}" STREQUAL "macOS")
+          message("::set-output name=qtc_dir::${qtc_dir}")
+          message("::set-output name=qtc_scripts_dir::${qtc_dir}/Qt Creator.app/Contents/Resources/scripts")
+        else()
+          message("::set-output name=qtc_dir::${qtc_dir}")
+          message("::set-output name=qtc_scripts_dir::${qtc_dir}/share/qtcreator/scripts")
+        endif()
 
         file(MAKE_DIRECTORY qtcreator)
 
@@ -215,7 +221,7 @@ jobs:
         execute_process(
           COMMAND python
             -u
-            ${{ steps.qt_creator.outputs.qtc_dir }}/share/qtcreator/scripts/build_plugin.py
+            ${{ steps.qt_creator.outputs.qtc_scripts_dir }}/build_plugin.py
             --name "$ENV{PLUGIN_NAME}-$ENV{QT_CREATOR_VERSION}-${{ matrix.config.artifact }}"
             --src .
             --build build
