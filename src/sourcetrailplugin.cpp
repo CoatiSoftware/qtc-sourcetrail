@@ -158,7 +158,7 @@ void SourcetrailPlugin::startListening()
 {
     if (!m_server->listen(QHostAddress::LocalHost, m_settings.m_sourcetrailPort))
     {
-        MessageManager::write(QString{"Sourcetrail Plugin TCP Server - Could not listen to port %1"}.arg(m_settings.m_sourcetrailPort));
+        MessageManager::writeFlashing(QString{"Sourcetrail Plugin TCP Server - Could not listen to port %1"}.arg(m_settings.m_sourcetrailPort));
     }
     else
     {
@@ -223,7 +223,7 @@ void SourcetrailPlugin::sendLocation()
     }
     else
     {
-        MessageManager::write(QString{"Sourcetrail Plugin TCP Server - Action Triggered but no editor"});
+        MessageManager::writeFlashing(QString{"Sourcetrail Plugin TCP Server - Action Triggered but no editor"});
     }
 }
 
