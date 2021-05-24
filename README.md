@@ -20,7 +20,7 @@ Supported Qt Creator Versions:
 
 ## Install
 
-Download the libary from [Releases](https://github.com/CoatiSoftware/qtc-sourcetrail/releases) and put it into the qtcreator plugins folder. To find out where the folder is located please check Help -> System Information... -> PluginsPath
+Download the libary from [Releases](https://github.com/CoatiSoftware/qtc-sourcetrail/releases) and put it into the qtcreator plugins folder. It is in `$PrefixPath/../lib/qtcreator/plugins` (for example `c:\Qt\qtcreator-4.12.0\lib\qtcreator\plugins`). To find out where the Qt Creator installation folder is located please check Help -> System Information... -> PrefixPath
 
 ## Settings
 
