@@ -5,6 +5,8 @@ CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++11
 
 DEFINES += SOURCETRAIL_LIBRARY
+DEFINES += VERSION_MINOR=$$QTC_VER_MINOR
+DEFINES += VERSION_MAJOR=$$QTC_VER_MAJOR
 
 # QtCreatorSourcetrail files
 TARGET = Sourcetrail
@@ -63,7 +65,14 @@ QTC_PLUGIN_RECOMMENDS += \
 
 ###### End _dependencies.pri contents ######
 
-include($$IDE_SOURCE_TREE/src/qtcreatorplugin.pri)
+#Check version cause after 4.13 structure slightly changed
+greaterThan(QTC_VER_MINOR, 13) | greaterThan(QTC_VER_MAJOR, 4){
+    include($$IDE_SOURCE_TREE/include/src/qtcreatorplugin.pri)
+}
+
+lessThan(QTC_VER_MINOR, 13) | lessThan(QTC_VER_MAJOR, 4){
+    include($$IDE_SOURCE_TREE/src/qtcreatorplugin.pri)
+}
 
 FORMS += \
     src/sourcetrailpluginsettingspage.ui

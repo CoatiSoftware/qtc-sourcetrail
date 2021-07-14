@@ -15,67 +15,103 @@ environment:
   matrix:    
     - platform: x86
       QTC_VER: 4.5
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.5
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.6
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.6
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.7
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.7
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.8
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x64
       QTC_VER: 4.8
+      QTC_PATCH: 0
       VS_VER: 2015
     
     - platform: x86
       QTC_VER: 4.9
+      QTC_PATCH: 0
       VS_VER: 2017
     
     - platform: x64
       QTC_VER: 4.9
+      QTC_PATCH: 0
       VS_VER: 2017
     
     - platform: x86
       QTC_VER: 4.10
+      QTC_PATCH: 0
       VS_VER: 2017
     
     - platform: x64
       QTC_VER: 4.10
+      QTC_PATCH: 0
       VS_VER: 2017
 
     - platform: x86
       QTC_VER: 4.11
+      QTC_PATCH: 0
       VS_VER: 2017
 
     - platform: x64
       QTC_VER: 4.11
+      QTC_PATCH: 0
       VS_VER: 2017
       
     - platform: x86
       QTC_VER: 4.12
+      QTC_PATCH: 0
       VS_VER: 2017
       
     - platform: x64
       QTC_VER: 4.12
+      QTC_PATCH: 0
       VS_VER: 2017
+    
+    - platform: x64
+      QTC_VER: 4.13
+      QTC_PATCH: 0
+      VS_VER: 2020
+
+    - platform: x86
+      QTC_VER: 4.13
+      QTC_PATCH: 0
+      VS_VER: 2020
+
+    - platform: x64
+      QTC_VER: 4.14
+      QTC_PATCH: 0
+      VS_VER: 2020
+
+    - platform: x86
+      QTC_VER: 4.14
+      QTC_PATCH: 0
+      VS_VER: 2020
 
 configuration:
   - Release
@@ -84,11 +120,13 @@ configuration:
 install:
   - cmd: IF %VS_VER% == 2015 IF %PLATFORM% == x86 SET download_dir=windows_vs%VS_VER%_32
   - cmd: IF %VS_VER% == 2015 IF %PLATFORM% == x64 SET download_dir=windows_vs%VS_VER%_64
-  - cmd: IF %VS_VER% == 2017 SET download_dir=windows_msvc%VS_VER%_%PLATFORM%  
+  - cmd: IF %VS_VER% == 2017 SET download_dir=windows_msvc%VS_VER%_%PLATFORM%
+  - cmd: IF %VS_VER% == 2020 IF %PLATFORM% == x64 SET download_dir=windows_x64  
+  - cmd: IF %VS_VER% == 2020 IF %PLATFORM% == x86 SET download_dir=windows_x86
   - cmd: echo %download_dir%
-  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/%download_dir%/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.%QTC_PATCH%/installer_source/%download_dir%/qtcreator_dev.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-dev.7z
   - cmd: 7z x -y qt-dev.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-src\" | findstr /b /r /c:"\<Everything is Ok"
-  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.0/installer_source/%download_dir%/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
+  - cmd: curl -fsSL "http://download.qt.io/official_releases/qtcreator/%QTC_VER%/%QTC_VER%.%QTC_PATCH%/installer_source/%download_dir%/qtcreator.7z" -o %APPVEYOR_BUILD_FOLDER%\qt-bin.7z
   - cmd: 7z x -y qt-bin.7z -o"%APPVEYOR_BUILD_FOLDER%\qt-bin\" | findstr /b /r /c:"\<Everything is Ok"
 
 # Setup an environment and generate import libs

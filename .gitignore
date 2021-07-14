@@ -2,6 +2,7 @@
 *.pro.user
 *.pro.user.*
 
+.7z
 .moc
 .obj
 .rcc

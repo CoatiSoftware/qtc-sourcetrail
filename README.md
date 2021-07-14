@@ -9,6 +9,8 @@ Windows Builds: [![Build status](https://ci.appveyor.com/api/projects/status/6lu
 Qt Creator Plugin for communication with [Sourcetrail](https://sourcetrail.com)
 
 Supported Qt Creator Versions:
+* Qt Creator 4.14.x
+* Qt Creator 4.13.x
 * Qt Creator 4.12.x
 * Qt Creator 4.11.x
 * Qt Creator 4.10.x
